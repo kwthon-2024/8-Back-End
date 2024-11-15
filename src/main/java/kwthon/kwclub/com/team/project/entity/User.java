@@ -29,6 +29,12 @@ public class User {
     @Column(nullable = false)
     private int age;
 
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private String department;
+
     @Column
     private String filePath; // 사용자 프로필 사진 경로
 

@@ -51,7 +51,7 @@ public class Club {
     @Column(nullable = false)
     private boolean isCentral; // 중앙동아리 여부
 
-    @OneToMany(mappedBy = "club")
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<UserClub> userClubs; // Club과 User의 중간 엔티티
 
     @Column(nullable = false)

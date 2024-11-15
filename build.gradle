@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(18)
     }
 }
 
@@ -27,7 +27,6 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     // MySQL 의존성 추가
-    implementation 'mysql:mysql-connector-java'
 
     // Lombok 의존성 추가
     implementation 'org.projectlombok:lombok:1.18.26'
@@ -45,3 +44,4 @@ tasks.named('test') {
 springBoot {
     mainClass = 'kwthon.kwclub.KwclubApplication'
 }
+

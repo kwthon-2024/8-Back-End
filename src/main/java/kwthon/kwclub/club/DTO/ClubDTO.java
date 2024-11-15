@@ -1,9 +1,5 @@
 package kwthon.kwclub.club.DTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import kwthon.kwclub.com.team.project.entity.Club;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +15,7 @@ public class ClubDTO {
     private String name;
     private String category;
     private String description;
+    private String filePath;
 
     public static ClubDTO from(Club club) {
         return ClubDTO.builder()
@@ -26,6 +23,7 @@ public class ClubDTO {
                 .name(club.getName())
                 .category(club.getCategory())
                 .description(club.getDescription())
+                .filePath(club.getFilePath())
                 .build();
     }
 
@@ -35,6 +33,7 @@ public class ClubDTO {
                 .name(clubDTO.getName())
                 .category(clubDTO.getCategory())
                 .description(clubDTO.getDescription())
+                .filePath(clubDTO.getFilePath())
                 .build();
     }
 }
