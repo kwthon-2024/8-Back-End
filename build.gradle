@@ -8,9 +8,9 @@ group = 'kwthon'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
@@ -18,16 +18,17 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	runtimeOnly 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    runtimeOnly 'com.h2database:h2'
 
     // MySQL 의존성 추가
     implementation 'mysql:mysql-connector-java'
-    
+
     // Lombok 의존성 추가
     implementation 'org.projectlombok:lombok:1.18.26'
     compileOnly 'org.projectlombok:lombok:1.18.26'
@@ -35,15 +36,12 @@ dependencies {
 
     // org.json 의존성 추가
     implementation 'org.json:json:20210307'
-
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
-// Spring Boot 3.x에서는 mainClassName을 더 이상 사용하지 않음
-// 대신 springBoot.mainClass 속성을 사용하여 메인 클래스를 지정합니다.
 springBoot {
-    mainClass = 'kwthon.kwclub.KwclubApplication' // 메인 클래스를 여기에 지정
+    mainClass = 'kwthon.kwclub.KwclubApplication'
 }
