@@ -1,4 +1,4 @@
-package com.team.project.entity;
+package kwthon.kwclub.com.team.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
 public class Activity {
 
     @Id

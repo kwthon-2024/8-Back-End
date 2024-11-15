@@ -1,7 +1,10 @@
-package com.team.project.entity;
+package kwthon.kwclub.com.team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
+
 public class Club {
 
     @Id
@@ -25,6 +29,21 @@ public class Club {
 
     @Column
     private String description;
+
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Builder.Default
+    @JsonIgnore
+    List<Announcement> announcements = new ArrayList<>();
+
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Builder.Default
+    @JsonIgnore
+    List<Activity> activities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Builder.Default
+    @JsonIgnore
+    List<Schedule> schedules = new ArrayList<>();
 
     @Column
     private String filePath; // 동아리 사진 경로
