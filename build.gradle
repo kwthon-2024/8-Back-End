@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(18)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -24,6 +24,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	runtimeOnly 'com.h2database:h2'
+
+    // MySQL 의존성 추가
+    implementation 'mysql:mysql-connector-java'
     
     // Lombok 의존성 추가
     implementation 'org.projectlombok:lombok:1.18.26'
