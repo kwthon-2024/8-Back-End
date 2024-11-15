@@ -1,4 +1,4 @@
-package kwthon.kwclub.com.team.project.entity;
+package com.team.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@ToString
 public class Activity {
 
     @Id
@@ -24,5 +24,5 @@ public class Activity {
     private String description;
 
     @Column(nullable = false)
-    private String date;
+    private String date; // 날짜 정보
 }

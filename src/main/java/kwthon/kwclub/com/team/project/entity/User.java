@@ -1,7 +1,8 @@
-package kwthon.kwclub.com.team.project.entity;
+package com.team.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,4 +28,10 @@ public class User {
 
     @Column(nullable = false)
     private int age;
+
+    @Column
+    private String filePath; // 사용자 프로필 사진 경로
+
+    @OneToMany(mappedBy = "user")
+    private List<UserClub> userClubs; // User와 Club의 중간 엔티티
 }

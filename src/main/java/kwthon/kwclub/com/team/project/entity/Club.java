@@ -1,10 +1,7 @@
-package kwthon.kwclub.com.team.project.entity;
+package com.team.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@ToString
 public class Club {
 
     @Id
@@ -29,18 +26,15 @@ public class Club {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @Builder.Default
-    @JsonIgnore
-    List<Announcement> announcements = new ArrayList<>();
+    @Column
+    private String filePath; // 동아리 사진 경로
 
-    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @Builder.Default
-    @JsonIgnore
-    List<Activity> activities = new ArrayList<>();
+    @Column(nullable = false)
+    private boolean isCentral; // 중앙동아리 여부
 
-    @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @Builder.Default
-    @JsonIgnore
-    List<Schedule> schedules = new ArrayList<>();
+    @OneToMany(mappedBy = "club")
+    private List<UserClub> userClubs; // Club과 User의 중간 엔티티
+
+    @Column(nullable = false)
+    private boolean isRecruiting; // 모집 중 여부
 }

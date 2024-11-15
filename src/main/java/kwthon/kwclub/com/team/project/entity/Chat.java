@@ -1,4 +1,4 @@
-package kwthon.kwclub.com.team.project.entity;
+package com.team.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,5 +28,5 @@ public class Chat {
     private String message;
 
     @Column(nullable = false)
-    private String timestamp;
+    private String timestamp; // 전송 시간
 }
