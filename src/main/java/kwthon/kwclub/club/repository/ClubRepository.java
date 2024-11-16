@@ -10,5 +10,5 @@ public interface ClubRepository extends JpaRepository<Club, Long> {
 
     List<Club> findAllByCategory(String category);
 
-//    List<Club> findAllByUser(Long userId);
+
 }

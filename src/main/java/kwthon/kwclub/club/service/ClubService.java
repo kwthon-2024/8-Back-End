@@ -1,10 +1,7 @@
 package kwthon.kwclub.club.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import kwthon.kwclub.club.DTO.ActivityDTO;
-import kwthon.kwclub.club.DTO.AnnouncementDTO;
-import kwthon.kwclub.club.DTO.ClubDTO;
-import kwthon.kwclub.club.DTO.ScheduleDTO;
+import kwthon.kwclub.club.DTO.*;
 import kwthon.kwclub.club.repository.*;
 import kwthon.kwclub.com.team.project.entity.*;
 import lombok.RequiredArgsConstructor;
@@ -47,14 +44,14 @@ public class ClubService {
 //    }
 
     @Transactional
-    public ClubDTO createClub(ClubDTO clubDTO) {
+    public ClubRequestDTO createClub(ClubRequestDTO clubRequestDTO) {
         Club club = Club.builder()
-                .name(clubDTO.getName())
-                .category(clubDTO.getCategory())
-                .description(clubDTO.getDescription())
+                .name(clubRequestDTO.getName())
+                .category(clubRequestDTO.getCategory())
+                .affiliation(clubRequestDTO.getAffiliation())
                 .build();
         Club savedClub = clubRepository.save(club);
-        return ClubDTO.from(savedClub);
+        return ClubRequestDTO.from(club);
     }
 
     @Transactional
@@ -104,6 +101,7 @@ public class ClubService {
                 .orElseThrow(
                         () -> new EntityNotFoundException("userClub not found")
                 );
+        return null;
     }
 
 }

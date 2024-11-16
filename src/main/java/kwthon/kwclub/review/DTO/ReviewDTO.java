@@ -3,19 +3,23 @@ package kwthon.kwclub.review.DTO;
 
 import kwthon.kwclub.com.team.project.entity.Review;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 public class ReviewDTO {
 
     private Long id;
     private String content;
-    private int rating;
 
     public static ReviewDTO from(Review review) {
-        return new ReviewDTO(review.getId(), review.getContent(), review.getRating());
+        return ReviewDTO.builder()
+                .id(review.getId())
+                .content(review.getContent())
+                .build();
     }
+
 }

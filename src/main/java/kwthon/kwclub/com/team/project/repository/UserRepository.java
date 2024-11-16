@@ -5,4 +5,8 @@ import kwthon.kwclub.com.team.project.entity.User;;  // User 클래스를 import
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+
+    Optional<User> findByStudentId(String studentId);
+
+    Optional<User> findByName(String name);
 }

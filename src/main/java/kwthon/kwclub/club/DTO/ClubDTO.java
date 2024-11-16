@@ -16,6 +16,7 @@ public class ClubDTO {
     private String category;
     private String description;
     private String filePath;
+    private String affiliation;
 
     public static ClubDTO from(Club club) {
         return ClubDTO.builder()
@@ -24,6 +25,7 @@ public class ClubDTO {
                 .category(club.getCategory())
                 .description(club.getDescription())
                 .filePath(club.getFilePath())
+                .affiliation(club.getAffiliation())
                 .build();
     }
 
@@ -34,6 +36,7 @@ public class ClubDTO {
                 .category(clubDTO.getCategory())
                 .description(clubDTO.getDescription())
                 .filePath(clubDTO.getFilePath())
+                .affiliation(clubDTO.getAffiliation())
                 .build();
     }
 }

@@ -1,7 +1,10 @@
 package kwthon.kwclub.com.team.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,15 +13,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@Builder
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
+    @Column(nullable = false)
+    private String studentId;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false)
     private String password;
@@ -38,6 +43,8 @@ public class User {
     @Column
     private String filePath; // 사용자 프로필 사진 경로
 
-    @OneToMany(mappedBy = "user")
-    private List<UserClub> userClubs; // User와 Club의 중간 엔티티
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @Builder.Default
+    @JsonIgnore
+    private List<UserClub> userClubs = new ArrayList<>(); // User와 Club의 중간 엔티티
 }

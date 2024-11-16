@@ -1,11 +1,16 @@
 package kwthon.kwclub.club.controller;
 
 import kwthon.kwclub.club.DTO.ClubDTO;
+import kwthon.kwclub.club.DTO.ClubDetailDTO;
+import kwthon.kwclub.club.DTO.ClubRequestDTO;
 import kwthon.kwclub.club.service.ActivityService;
 import kwthon.kwclub.club.service.AnnouncementService;
 import kwthon.kwclub.club.service.ClubService;
 import kwthon.kwclub.club.service.ScheduleService;
 import kwthon.kwclub.com.team.project.entity.Club;
+import kwthon.kwclub.com.team.project.token.JwtUtil;
+import kwthon.kwclub.review.DTO.ReviewDTO;
+import kwthon.kwclub.review.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -25,24 +30,58 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/club")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ClubController {
 
     private final ClubService clubService;
     private final ActivityService activityService;
     private final AnnouncementService announcementService;
     private final ScheduleService scheduleService;
+    private final ReviewService reviewService;
+    private final JwtUtil jwtUtil;
 
-    @GetMapping("/{clubId}")
-    public ResponseEntity<ClubDTO> getClubDetails(@PathVariable Long clubId) {
+    @GetMapping("/{clubId}/details")
+    public ResponseEntity<ClubDetailDTO> getClubDetails(@PathVariable Long clubId) {
         ClubDTO clubDTO = clubService.getClubDetails(clubId);
+        ClubDetailDTO clubDetailDTO = ClubDetailDTO.builder()
+                .name(clubDTO.getName())
+                .affiliation(clubDTO.getAffiliation())
+                .build();
 
         if (clubDTO != null) {
-            return ResponseEntity.ok(clubDTO);
+            return ResponseEntity.ok(clubDetailDTO);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    @GetMapping("/{clubId}/reviews")
+    public ResponseEntity<List<ReviewDTO>> getReviews(@PathVariable Long clubId) {
+        List<ReviewDTO> reviews = reviewService.getAllReviewsByClub(clubId);
+        return ResponseEntity.ok(reviews);
+    }
+
+    @PostMapping("/{clubId}/reviews")
+    public ResponseEntity<String> createReviews(@PathVariable Long clubId,
+                                                @RequestHeader("Authorization") String token,
+                                                @RequestBody ReviewDTO reviewDTO) {
+        try {
+            String jwtToken = token.replace("Bearer ", "");
+            String name = jwtUtil.extractName(jwtToken);
+
+            reviewService.addReview(clubId, reviewDTO.getContent(), name);
+            return ResponseEntity.status(HttpStatus.CREATED).body("리뷰 등록 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("리뷰 생성 실패 " + e.getMessage());
+        }
+    }
+    @PostMapping("/")
+    public ResponseEntity<String> createClub(@RequestBody ClubRequestDTO clubRequestDTO) {
+        clubService.createClub(clubRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
 
     @GetMapping("/{category}")
     public ResponseEntity<List<ClubDTO>> getClubsByCategory(@PathVariable String category) {

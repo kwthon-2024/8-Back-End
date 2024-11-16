@@ -1,9 +1,6 @@
 package kwthon.kwclub.club;
 
-import kwthon.kwclub.club.DTO.ActivityDTO;
-import kwthon.kwclub.club.DTO.AnnouncementDTO;
-import kwthon.kwclub.club.DTO.ClubDTO;
-import kwthon.kwclub.club.DTO.ScheduleDTO;
+import kwthon.kwclub.club.DTO.*;
 import kwthon.kwclub.club.service.ActivityService;
 import kwthon.kwclub.club.service.AnnouncementService;
 import kwthon.kwclub.club.service.ClubService;
@@ -41,10 +38,10 @@ public class ClubServiceTest {
         //given
         Club club = Club.builder()
                 .name("kw")
-                .description("kwClub")
                 .category("sports")
+                .affiliation("central")
                 .build();
-        ClubDTO clubDTO = clubService.createClub(ClubDTO.from(club));
+        ClubRequestDTO clubDTO = clubService.createClub(ClubRequestDTO.from(club));
         ClubDTO savedClubDTO = clubService.getClubDetails(clubDTO.getId());
         Activity activity1 = Activity.builder()
                 .club(ClubDTO.toEntity(savedClubDTO))
@@ -72,10 +69,10 @@ public class ClubServiceTest {
         //given
         Club club = Club.builder()
                 .name("kw")
-                .description("kwClub")
+                .affiliation("kwClub")
                 .category("sports")
                 .build();
-        ClubDTO clubDTO = clubService.createClub(ClubDTO.from(club));
+        ClubRequestDTO clubDTO = clubService.createClub(ClubRequestDTO.from(club));
         ClubDTO savedClubDTO = clubService.getClubDetails(clubDTO.getId());
         Announcement announcement1 = Announcement.builder()
                 .content("content1")
@@ -105,10 +102,10 @@ public class ClubServiceTest {
         //given
         Club club = Club.builder()
                 .name("kw")
-                .description("kwClub")
+                .affiliation("kwClub")
                 .category("sports")
                 .build();
-        ClubDTO clubDTO = clubService.createClub(ClubDTO.from(club));
+        ClubRequestDTO clubDTO = clubService.createClub(ClubRequestDTO.from(club));
         ClubDTO savedClubDTO = clubService.getClubDetails(clubDTO.getId());
         Schedule schedule1 = Schedule.builder()
                 .location("location1")

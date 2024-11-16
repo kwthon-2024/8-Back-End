@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class Club {
 
     @Id
@@ -49,7 +48,7 @@ public class Club {
     private String filePath; // 동아리 사진 경로
 
     @Column(nullable = false)
-    private boolean isCentral; // 중앙동아리 여부
+    private String affiliation;
 
     @OneToMany(mappedBy = "club", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<UserClub> userClubs; // Club과 User의 중간 엔티티

@@ -27,6 +27,4 @@ public class Review {
     @Column(nullable = false)
     private String content;
 
-    @Column
-    private int rating; // 평점
 }
