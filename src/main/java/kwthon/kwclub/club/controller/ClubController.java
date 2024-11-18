@@ -86,7 +86,7 @@ public class ClubController {
     @GetMapping("/{category}")
     public ResponseEntity<List<ClubDTO>> getClubsByCategory(@PathVariable String category) {
         List<ClubDTO> clubsByCategory = clubService.getClubsByCategory(category);
-
+        System.out.println("------------" + clubsByCategory);
         if (clubsByCategory != null) {
             return ResponseEntity.ok(clubsByCategory);
         }
